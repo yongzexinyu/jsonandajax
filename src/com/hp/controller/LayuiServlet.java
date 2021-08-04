@@ -10,10 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @WebServlet(name = "LayuiServlet",urlPatterns = "/LayuiServlet")
 public class LayuiServlet extends HttpServlet {
@@ -31,16 +30,31 @@ public class LayuiServlet extends HttpServlet {
      s1.setId(001);
      s1.setName("唐僧");
      s1.setAge(50);
+     s1.setBirthday(new Date());
+     s1.setShen(false);
      students.add(s1);
+
         Student s2=new Student();
         s2.setId(002);
         s2.setName("孙悟空");
-        s2.setAge(50);
+        s2.setAge(150);
+        String bdate="1980-09-07 23:12:45";
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date bDate=null;
+        try {
+            bDate=simpleDateFormat.parse(bdate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        s2.setBirthday(bDate);
+         s2.setShen(true);
         students.add(s2);
         Student s3=new Student();
         s3.setId(003);
         s3.setName("猪八戒");
         s3.setAge(50);
+        s3.setBirthday(new Date());
+        s3.setShen(true);
         students.add(s3);
 //去自己创建一个layui后台的json格式
         Map map=new HashMap<>();

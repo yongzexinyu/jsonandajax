@@ -29,16 +29,16 @@
     </div>
 </script>
 <script type="text/html" id="switchTpl">
-    <input type="checkbox" name="isRepair"  lay-skin="switch" lay-text="通过|不通过" >
+    <input type="checkbox" name="isRepair" lay-filter="RepairDemo" lay-skin="switch" lay-text="通过|不通过" >
 </script>
 <script type="text/html" id="checkboxTpl">
-    <input type="checkbox" name="isRetest"  title="已复测" checked="true" >
+    <input type="checkbox" name="isRetest" lay-filter="RetestDemo" title="已复测" checked="true" >
 </script>
 <script type="text/html" id="feedback">
-    <input type="checkbox" name="isfeedback" title="已反馈"  checked="true">
+    <input type="checkbox" name="isfeedback" lay-filter="feedbackDemo" title="已反馈"  checked="true">
 </script>
 <script type="text/html" id="notaic">
-    <input type="checkbox" name="isnotaic"  title="已下发"  checked="true" >
+    <input type="checkbox" name="isnotaic"   lay-filter="notaicDemo" title="已下发"  checked="true" >
 </script>
 <script>
     layui.use(['layer', 'form', 'table','jquery'], function (args) {
@@ -93,7 +93,7 @@
                 data.value="不通过"
                 console.log(data.value)
             }
-            $.ajax({
+            /*$.ajax({
                 url:'/FormServlet',
                 type:'post',
                 data:{
@@ -103,7 +103,7 @@
                 success:function (res) {
                     // console.log(res)
                 }
-            })
+            })*/
             //监听指定开关
             layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
                 offset: '6px'

@@ -9,11 +9,66 @@
     <link rel="stylesheet" href="/layui-v2.5.6/layui/css/layui.css">
 </head>
 <body>
+<!--我是修改-->
+<script type="text/html" id="updateHtml" >
+    <form class="layui-form layui-form-pane" action="" onsubmit="return false">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">姓名</label>
+            <div class="layui-input-inline">
+                <input type="text" name=""  placeholder="请输入姓名"  class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">年龄</label>
+            <div class="layui-input-inline">
+                <input type="text" name=""  placeholder="请输入年龄"  class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+        <label class="layui-form-label">是否神仙</label>
+        <div class="layui-input-inline">
+            <input type="radio" name="shen" value="神仙" title="神仙" checked="">
+            <input type="radio" name="shen" value="凡人" title="凡人">
+            <!--   <input type="radio" name="sex" value="禁" title="禁用" disabled="">-->
+        </div>
+        </div>
+        <!--下面应该有提交或者返回按钮-->
+    </form>
+
+</script>
+
+<!--加上一个搜索框-->
+<!--layui-form-pane 变成方框格式-->
+<form class="layui-form layui-form-pane" action="" onsubmit="return false">
+    <div class="layui-form-item">
+        <label class="layui-form-label">姓名</label>
+        <div class="layui-input-inline">
+            <input type="text" name=""  placeholder="请输入姓名"  class="layui-input">
+        </div>
+        <label class="layui-form-label">年龄</label>
+        <div class="layui-input-inline">
+            <select name="">
+                <option value="1" selected="">100岁以上</option>
+                <option value="2" >100岁以下</option>
+            </select>
+        </div>
+
+        <label class="layui-form-label">是否神仙</label>
+        <div class="layui-input-inline">
+            <input type="radio" name="shen" value="神仙" title="神仙" checked="">
+            <input type="radio" name="shen" value="凡人" title="凡人">
+         <!--   <input type="radio" name="sex" value="禁" title="禁用" disabled="">-->
+        </div>
+        <div class="layui-input-inline">
+        <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+        </div>
+    </div>
+
+</form>
 
 <table class="layui-hide" id="test" lay-filter="test"></table>
-
-
-
 
 
 <script type="text/html" id="toolbarDemo">
@@ -110,7 +165,33 @@
                     layer.close(index);
                 });
             } else if(obj.event === 'edit'){
-                layer.prompt({
+               /* alert("你好")*/
+                /*
+                如果是页面层
+                */
+                layer.open({
+                    title:'编辑',
+                    area:['600px','600px'],
+                    type: 1,
+                   // content: '<h1>你好世界</h1>' //一般不这么写
+                    content:$("#updateHtml").html(),
+                    success:function (layero,index) {
+                        console.log(layero)
+                        console.log(index)
+                        console.log("我是layer弹出成功后的回调")
+                        form.render();//重点强调：当界面发生改变时，记得重新渲染模块，不然不显示效果
+                    },
+                    btn:['确定修改','取消修改','其他1','其他2'],
+                    yes:function (index,layero) {
+                        alert("向后台发送了ajax")
+                        return false;//开启改代码可禁止点击该按钮关闭
+                    },
+                    btn2:function (index,layero) {
+                        alert("我取消了修改")
+                        return false;//开启改代码可禁止点击该按钮关闭
+                    }
+                });
+               /* layer.prompt({
                     formType: 2
                     ,value: data.email
                 }, function(value, index){
@@ -118,7 +199,7 @@
                         email: value
                     });
                     layer.close(index);
-                });
+                });*/
             }
         });
         //监听指定开关
